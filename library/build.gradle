@@ -1,8 +1,12 @@
-apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
+plugins {
+    id 'com.android.library'
+    id "com.vanniktech.maven.publish" version "0.35.0"
+}
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
+
+    namespace "com.liaoinstan.springview"
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
@@ -24,15 +28,7 @@ dependencies {
     implementation "com.google.android.material:material:$materialLibraryVersion"
 }
 
-publish {
-    artifactId = 'library'  // artifactId
-    uploadName = 'SpringView' // 展示名字
-    publishVersion = '1.7.0' // 版本
-    desc = rootProject.desc
-    userOrg = rootProject.userOrg
-    groupId = rootProject.groupId
-    website = rootProject.website
-    licences = rootProject.licences
-    autoPublish = false
-    dryRun = true
+mavenPublishing {
+    publishToMavenCentral()
+    signAllPublications()
 }
